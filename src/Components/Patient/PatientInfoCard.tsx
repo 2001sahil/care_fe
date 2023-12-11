@@ -112,7 +112,7 @@ export default function PatientInfoCard(props: {
         title={bedDialogTitle}
         show={open}
         onClose={() => setOpen(false)}
-        className="md:max-w-3xl"
+        className="md:max-w-3xl "
       >
         {patient?.facility && patient?.id && consultation?.id ? (
           <Beds
@@ -145,10 +145,10 @@ export default function PatientInfoCard(props: {
         </>
       )}
 
-      <section className="flex flex-col items-center justify-between space-y-3 lg:flex-row lg:space-x-2 lg:space-y-0">
+      <section className="flex flex-col items-center justify-between space-y-3 lg:flex-row lg:space-x-2 lg:space-y-0 ">
         <div className="flex w-full flex-col bg-white px-4 py-2 lg:w-7/12 lg:flex-row lg:p-6">
           {/* Can support for patient picture in the future */}
-          <div className="mt-2 flex flex-col items-center">
+          <div className="mt-2 flex flex-col items-center ">
             <div
               className={`h-24 w-24 min-w-[5rem] bg-gray-200 ${categoryClass}-profile`}
             >
@@ -171,7 +171,7 @@ export default function PatientInfoCard(props: {
                   </p>
                 </div>
               ) : (
-                <div className="flex h-full items-center justify-center">
+                <div className="flex h-full items-center justify-center ">
                   <i className="fas fa-user-injured text-3xl text-gray-500"></i>
                 </div>
               )}
@@ -183,7 +183,7 @@ export default function PatientInfoCard(props: {
                 {category.toUpperCase()}
               </div>
             )}
-            <ButtonV2 ghost onClick={() => setOpen(true)} className="mt-1">
+            <ButtonV2 ghost onClick={() => setOpen(true)} className="mt-1 ">
               {bedDialogTitle}
             </ButtonV2>
           </div>
@@ -211,7 +211,7 @@ export default function PatientInfoCard(props: {
                   </div>
                 )}
             </div>
-            <div className="flex flex-col items-center gap-2 sm:flex-row lg:mb-2">
+            <div className="flex flex-col items-center gap-2 sm:flex-row lg:mb-2 ">
               <Link
                 href={`/facility/${consultation?.facility}`}
                 className="font-semibold text-black hover:text-primary-600"
@@ -243,7 +243,7 @@ export default function PatientInfoCard(props: {
                 Discharged from CARE
               </p>
             )}
-            <div className="flex flex-col items-center gap-2 text-sm sm:flex-row lg:mt-4">
+            <div className="flex flex-col items-center gap-2 text-sm sm:flex-row lg:mt-4 ">
               <div className="flex flex-col items-center gap-2 text-sm text-gray-900 sm:flex-row sm:text-sm">
                 {patient.action && patient.action != 10 && (
                   <div>
@@ -260,7 +260,7 @@ export default function PatientInfoCard(props: {
                   </div>
                 )}
                 <div>
-                  <div className="inline-flex w-full items-center justify-start rounded-lg border border-gray-500 bg-gray-200 p-1 px-3 text-xs font-semibold leading-4">
+                  <div className="inline-flex w-full items-center justify-start rounded-lg border border-gray-500 bg-gray-200 p-1 px-3 text-xs font-semibold leading-4 ">
                     <b>Age</b>: {patient.age} years
                   </div>
                 </div>
@@ -281,7 +281,7 @@ export default function PatientInfoCard(props: {
                 )}
               </div>
             </div>
-            <div className="flex flex-col items-center gap-2 text-sm sm:flex-row lg:mt-4">
+            <div className="flex flex-col items-center gap-2 text-sm sm:flex-row lg:mt-4 ">
               {[
                 [
                   "Respiratory Support",
@@ -306,7 +306,7 @@ export default function PatientInfoCard(props: {
               })}
             </div>
             {!!consultation?.discharge_date && (
-              <div className="mt-3 flex gap-4 bg-cyan-300 px-3 py-1 text-sm font-medium">
+              <div className="mt-3 flex gap-4 bg-cyan-300 px-3 py-1 text-sm font-medium ">
                 <div>
                   <span>
                     {
@@ -341,13 +341,13 @@ export default function PatientInfoCard(props: {
           </div>
         </div>
 
-        <div className="flex w-full flex-col gap-2 px-4 py-1 lg:w-fit lg:p-6">
+        <div className="flex w-full flex-col gap-2 px-4 py-1 lg:w-fit lg:p-6 ">
           {!!consultation?.discharge_date && (
-            <div className="flex flex-col items-center justify-center">
-              <div className="text-sm font-normal leading-5 text-gray-500">
+            <div className="flex flex-col items-center justify-center ">
+              <div className="text-sm font-normal leading-5 text-gray-500 ">
                 Discharge Reason
               </div>
-              <div className="mt-1 text-xl font-semibold leading-5 text-gray-900">
+              <div className="mt-1 text-xl font-semibold leading-5 text-gray-900 ">
                 {!consultation?.discharge_reason ? (
                   <span className="text-gray-800">
                     {consultation.suggestion === "OP"
@@ -395,7 +395,7 @@ export default function PatientInfoCard(props: {
           ].map(
             (action: any, i) =>
               action[3] && (
-                <div className="relative" key={i}>
+                <div className="relative " key={i}>
                   <ButtonV2
                     key={i}
                     variant={action?.[4]?.[0] ? "danger" : "primary"}
@@ -420,14 +420,14 @@ export default function PatientInfoCard(props: {
                     }}
                     className="w-full"
                   >
-                    <span className="flex w-full items-center justify-center gap-2 lg:justify-start">
+                    <span className="flex w-full items-center justify-center gap-2 lg:justify-start ">
                       <CareIcon className={`care-l-${action[2]} text-lg`} />
                       <p className="font-semibold">{action[1]}</p>
                     </span>
                   </ButtonV2>
                   {action?.[4]?.[0] && (
                     <>
-                      <p className="mt-1 text-xs text-red-500">
+                      <p className="mt-1 text-xs text-red-500 ">
                         {action[4][1]}
                       </p>
                     </>

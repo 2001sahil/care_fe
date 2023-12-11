@@ -109,153 +109,157 @@ export default function InvestigationBuilder(
 
   return (
     <div className="mt-2">
-      {investigations.map((investigation, i) => {
-        const setFrequency = (frequency: string) => {
-          setItem(
-            {
-              ...investigation,
-              frequency,
-            },
-            i
-          );
-        };
+      {Array.isArray(investigations) &&
+        investigations.map((investigation, i) => {
+          const setFrequency = (frequency: string) => {
+            setItem(
+              {
+                ...investigation,
+                frequency,
+              },
+              i
+            );
+          };
 
-        const setType = (type: string[]) => {
-          setItem(
-            {
-              ...investigation,
-              type,
-            },
-            i
-          );
-        };
+          const setType = (type: string[]) => {
+            setItem(
+              {
+                ...investigation,
+                type,
+              },
+              i
+            );
+          };
 
-        return (
-          <div
-            key={i}
-            className={`border-2 ${
-              activeIdx === i ? "border-primary-500" : "border-gray-500"
-            } mb-2 border-spacing-2 rounded-md border-dashed p-3 text-sm text-gray-600`}
-          >
-            <div className="mb-2 flex flex-wrap items-center gap-2 md:flex-row md:gap-4">
-              <h4 className="text-base font-medium text-gray-700">
-                Investigation No. {i + 1}
-              </h4>
-              <button
-                type="button"
-                className="flex h-full items-center justify-center gap-1.5 rounded-md bg-red-500 px-3 py-1 text-sm text-gray-100 transition hover:bg-red-600"
-                onClick={() =>
-                  setInvestigations(
-                    investigations.filter((investigation, index) => i != index)
-                  )
-                }
-              >
-                Delete Investigation
-                <CareIcon className="care-l-trash-alt h-4 w-4" />
-              </button>
-            </div>
-            <div className="flex flex-col gap-2">
-              <div className="flex w-full flex-col justify-between">
-                <div>
-                  Investigations Recommended
-                  <span className="text-danger-500">{" *"}</span>
-                </div>
-                <PrescriptionMultiDropdown
-                  options={investigationsList}
-                  placeholder="Search Investigations"
-                  selectedValues={
-                    investigation.type?.constructor === Array
-                      ? investigation.type
-                      : []
+          return (
+            <div
+              key={i}
+              className={`border-2 ${
+                activeIdx === i ? "border-primary-500" : "border-gray-500"
+              } mb-2 border-spacing-2 rounded-md border-dashed p-3 text-sm text-gray-600`}
+            >
+              <div className="mb-2 flex flex-wrap items-center gap-2 md:flex-row md:gap-4">
+                <h4 className="text-base font-medium text-gray-700">
+                  Investigation No. {i + 1}
+                </h4>
+                <button
+                  type="button"
+                  className="flex h-full items-center justify-center gap-1.5 rounded-md bg-red-500 px-3 py-1 text-sm text-gray-100 transition hover:bg-red-600"
+                  onClick={() =>
+                    setInvestigations(
+                      investigations.filter(
+                        (investigation, index) => i != index
+                      )
+                    )
                   }
-                  setSelectedValues={setType}
-                  onFocus={() => setActiveIdx(i)}
-                  onBlur={() => setActiveIdx(null)}
-                />
+                >
+                  Delete Investigation
+                  <CareIcon className="care-l-trash-alt h-4 w-4" />
+                </button>
               </div>
-              <div className="flex w-full shrink-0 flex-col justify-between">
-                <div className="flex flex-col gap-4 md:flex-row">
-                  <div className="flex shrink-0 cursor-pointer items-center gap-2 md:mt-3">
-                    Is the investigation repetitive?
-                    <br />
-                    <input
-                      type="checkbox"
-                      onFocus={() => setActiveIdx(i)}
-                      onBlur={() => setActiveIdx(null)}
-                      className="inline-block h-[18px] w-[18px] rounded-md"
-                      checked={investigation?.repetitive || false}
-                      onChange={(e) => {
-                        setItem(
-                          {
-                            ...investigation,
-                            repetitive: e.currentTarget.checked,
-                          },
-                          i
-                        );
-                      }}
-                    />
+              <div className="flex flex-col gap-2">
+                <div className="flex w-full flex-col justify-between">
+                  <div>
+                    Investigations Recommended
+                    <span className="text-danger-500">{" *"}</span>
                   </div>
-                  {investigation.repetitive ? (
-                    <div className="w-full">
-                      <div className="mb-1">
-                        Frequency<span className="text-danger-500">{" *"}</span>
-                      </div>
-                      <PrescriptionDropdown
-                        placeholder="Frequency"
-                        options={FREQUENCY}
-                        value={investigation.frequency || ""}
-                        setValue={setFrequency}
-                        onFocus={() => setActiveIdx(i)}
-                        onBlur={() => setActiveIdx(null)}
-                      />
-                    </div>
-                  ) : (
-                    <div className="w-full">
-                      Time<span className="text-danger-500">{" *"}</span>
-                      <input
-                        type="datetime-local"
-                        className="block w-[calc(100%-5px)] rounded border border-gray-400 bg-gray-100 px-4 py-2 text-sm hover:bg-gray-200 focus:border-primary-500 focus:bg-white focus:outline-none focus:ring-primary-500"
-                        value={investigation.time || ""}
-                        onChange={(e) => {
-                          setItem(
-                            {
-                              ...investigation,
-                              time: e.currentTarget.value,
-                            },
-                            i
-                          );
-                        }}
-                        onFocus={() => setActiveIdx(i)}
-                        onBlur={() => setActiveIdx(null)}
-                      />
-                    </div>
-                  )}
-                </div>
-                <div className="w-full">
-                  <div className="mb-1">Notes</div>
-                  <input
-                    type="text"
-                    className="cui-input-base py-2"
-                    placeholder="Notes"
-                    value={investigation.notes || ""}
-                    onChange={(e) => {
-                      setItem(
-                        {
-                          ...investigation,
-                          notes: e.currentTarget.value,
-                        },
-                        i
-                      );
-                    }}
+                  <PrescriptionMultiDropdown
+                    options={investigationsList}
+                    placeholder="Search Investigations"
+                    selectedValues={
+                      investigation.type?.constructor === Array
+                        ? investigation.type
+                        : []
+                    }
+                    setSelectedValues={setType}
                     onFocus={() => setActiveIdx(i)}
                     onBlur={() => setActiveIdx(null)}
                   />
                 </div>
+                <div className="flex w-full shrink-0 flex-col justify-between">
+                  <div className="flex flex-col gap-4 md:flex-row">
+                    <div className="flex shrink-0 cursor-pointer items-center gap-2 md:mt-3">
+                      Is the investigation repetitive?
+                      <br />
+                      <input
+                        type="checkbox"
+                        onFocus={() => setActiveIdx(i)}
+                        onBlur={() => setActiveIdx(null)}
+                        className="inline-block h-[18px] w-[18px] rounded-md"
+                        checked={investigation?.repetitive || false}
+                        onChange={(e) => {
+                          setItem(
+                            {
+                              ...investigation,
+                              repetitive: e.currentTarget.checked,
+                            },
+                            i
+                          );
+                        }}
+                      />
+                    </div>
+                    {investigation.repetitive ? (
+                      <div className="w-full">
+                        <div className="mb-1">
+                          Frequency
+                          <span className="text-danger-500">{" *"}</span>
+                        </div>
+                        <PrescriptionDropdown
+                          placeholder="Frequency"
+                          options={FREQUENCY}
+                          value={investigation.frequency || ""}
+                          setValue={setFrequency}
+                          onFocus={() => setActiveIdx(i)}
+                          onBlur={() => setActiveIdx(null)}
+                        />
+                      </div>
+                    ) : (
+                      <div className="w-full">
+                        Time<span className="text-danger-500">{" *"}</span>
+                        <input
+                          type="datetime-local"
+                          className="block w-[calc(100%-5px)] rounded border border-gray-400 bg-gray-100 px-4 py-2 text-sm hover:bg-gray-200 focus:border-primary-500 focus:bg-white focus:outline-none focus:ring-primary-500"
+                          value={investigation.time || ""}
+                          onChange={(e) => {
+                            setItem(
+                              {
+                                ...investigation,
+                                time: e.currentTarget.value,
+                              },
+                              i
+                            );
+                          }}
+                          onFocus={() => setActiveIdx(i)}
+                          onBlur={() => setActiveIdx(null)}
+                        />
+                      </div>
+                    )}
+                  </div>
+                  <div className="w-full">
+                    <div className="mb-1">Notes</div>
+                    <input
+                      type="text"
+                      className="cui-input-base py-2"
+                      placeholder="Notes"
+                      value={investigation.notes || ""}
+                      onChange={(e) => {
+                        setItem(
+                          {
+                            ...investigation,
+                            notes: e.currentTarget.value,
+                          },
+                          i
+                        );
+                      }}
+                      onFocus={() => setActiveIdx(i)}
+                      onBlur={() => setActiveIdx(null)}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
       <button
         type="button"
         onClick={() => {

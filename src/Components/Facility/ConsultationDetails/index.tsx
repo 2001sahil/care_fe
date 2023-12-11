@@ -323,7 +323,7 @@ export const ConsultationDetails = (props: any) => {
           </div>
         </nav>
         <div className="mt-2 flex w-full flex-col md:flex-row">
-          <div className="h-full w-full rounded-lg border bg-white text-black shadow">
+          <div className="h-full w-full rounded-lg border bg-white text-black shadow  ">
             <PatientInfoCard
               patient={patientData}
               consultation={consultationData}
@@ -333,7 +333,7 @@ export const ConsultationDetails = (props: any) => {
               showAbhaProfile={qParams["show-abha-profile"] === "true"}
             />
 
-            <div className="flex flex-col justify-between border-t px-4 pt-5 md:flex-row">
+            <div className="flex flex-col justify-between border-t px-4 pt-5 md:flex-row  ">
               {consultationData.admitted_to && (
                 <div className="mt-2 rounded-lg border bg-gray-100 p-2 md:mt-0">
                   <div className="border-b-2 py-1">
